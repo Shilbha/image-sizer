@@ -8,6 +8,7 @@ export default function Resize() {
   // const [img, setImg] = useState("");
   const [Width,setWidth] = useState("");
   const [height,setHeight] = useState("");
+  const previewImg = uploadBox.querySelector("img");
 
  
 	
@@ -27,7 +28,7 @@ export default function Resize() {
 
       try {
         for(let i =0; i<files.length;i++) {
-         
+        previewImg.src = URL.createObjectURL(files[i]);
       } 
     }
       catch (err) {
@@ -49,7 +50,7 @@ export default function Resize() {
      <div >
         
             
-            <input   type="file" id="file" webkitdirectory="" directory="" style={{height:500}}/>
+            <input   type="file" id="file" webkitdirectory="" directory="" />
      
       {/* <input type="number" onChange={((e)=>{
         setWidth(e.target.value)
