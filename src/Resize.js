@@ -13,13 +13,14 @@ export default function Resize() {
   // const heightInput = document.querySelector(".height input");
 
   const inputRef = useRef(null);
-  const [files, setFiles] = useState([]);
+  
 
-  const onZip = (e) => {
+  const onZip = () => {
     const zip = new JSZip();
-    const files = Array.from(e.target.files);
+    const files = Array.from(inputRef.current.files);
 
     files.forEach((file) => {
+      console.log(file)
       zip.file(file.webkitRelativePath, file);
     });
     zip
@@ -64,17 +65,20 @@ export default function Resize() {
       canvas.width = widthInput.value;
       canvas.height = heightInput.value;
   
-    
-      ctx.drawImage(previewImg, 0, 0, canvas.width, canvas.height);
       
+      ctx.drawImage(previewImg, 0, 0, canvas.width, canvas.height);
+      console.log(a)
       
       a.href = canvas.toDataURL("image/jpeg");
+      const img = canvas.toDataURL("image/jpeg");
+      console.log(img)
+      
       a.download = new Date().getTime(); 
       a.click(); 
   }
   
 
-    const click = ()=>{
+    const click1 = ()=>{
       console.log("Hello")
       const fileInput = document.querySelector(".input")
       fileInput.click()
@@ -88,8 +92,8 @@ export default function Resize() {
    
 
 <div className="wrapper">
-      <div className="upload-box" onClick={click}>
-        <input className='input' onChange={loadFile} type="file" webkitdirectory="" directory="" accept="image/*" />
+      <div className="upload-box" onClick={click1}>
+        <input className='input' onChange={loadFile} type="file" webkitdirectory="" directory="" accept="image/*" ref={inputRef}/>
         <img className='img' src="https://www.codingnepalweb.com/demos/resize-and-compress-image-javascript/upload-icon.svg" alt=""/>
         <p>Browse File to Upload</p>
       </div>
